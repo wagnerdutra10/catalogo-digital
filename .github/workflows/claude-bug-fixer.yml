@@ -2,11 +2,13 @@ name: Claude Bug Fixer
 
 on:
   issues:
-    types: [labeled]
+    types: [opened, labeled]
 
 jobs:
   fix-bug:
-    if: github.event.label.name == 'bug'
+    if: |
+      (github.event.action == 'labeled' && github.event.label.name == 'bug') ||
+      (github.event.action == 'opened' && contains(toJSON(github.event.issue.labels), '"name":"bug"'))
     runs-on: ubuntu-latest
     permissions:
       contents: write
