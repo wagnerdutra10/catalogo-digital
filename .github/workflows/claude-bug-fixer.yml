@@ -48,4 +48,25 @@ jobs:
             - Faça apenas as mudanças necessárias para corrigir o bug — sem refatorações extras
             - Mantenha consistência com o estilo de código existente
             - Se o bug não for reproduzível ou a causa não for clara, comente na issue pedindo mais informações
-          claude_args: '--max-turns 50 --allowedTools "Bash,Read,Edit,Write,Glob,Grep,LS"'
+          settings: |
+            {
+              "permissions": {
+                "allow": [
+                  "Bash(git *)",
+                  "Bash(gh *)",
+                  "Bash(ls *)",
+                  "Bash(find *)",
+                  "Bash(grep *)",
+                  "Bash(cat *)",
+                  "Bash(echo *)",
+                  "Bash(mkdir *)",
+                  "Bash(cp *)",
+                  "Bash(mv *)",
+                  "Bash(node *)",
+                  "Bash(npm *)",
+                  "Bash(npx *)"
+                ],
+                "deny": []
+              }
+            }
+          claude_args: '--max-turns 50'
