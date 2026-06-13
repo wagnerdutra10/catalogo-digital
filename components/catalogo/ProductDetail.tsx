@@ -42,7 +42,7 @@ export function ProductDetail({ product, onBack, onAdd }: ProductDetailProps) {
       </button>
 
       <div className="flex-1 min-h-0 overflow-y-auto no-scrollbar">
-        <div className="relative w-full bg-linen" style={{ aspectRatio: "4/5" }}>
+        <div className="relative w-full bg-linen max-h-[60vh]" style={{ aspectRatio: "4/5" }}>
           <Image
             src={product.image}
             alt={product.name}
