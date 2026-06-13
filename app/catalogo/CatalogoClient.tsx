@@ -86,8 +86,8 @@ export function CatalogoClient() {
             onBack={() => setOpenProduct(null)}
             onAdd={handleAdd}
           />
+          {toast && <Toast msg={toast} position="bottom-center" />}
         </div>
-        {toast && <Toast msg={toast} position="bottom-center" />}
       </div>
     );
   }
