@@ -79,12 +79,14 @@ export function CatalogoClient() {
 
   if (openProduct) {
     return (
-      <div className="fixed inset-0 bg-ivory z-20">
-        <ProductDetail
-          product={openProduct}
-          onBack={() => setOpenProduct(null)}
-          onAdd={handleAdd}
-        />
+      <div className="fixed inset-0 bg-ivory z-20 md:flex md:justify-center">
+        <div className="w-full h-full md:max-w-sm">
+          <ProductDetail
+            product={openProduct}
+            onBack={() => setOpenProduct(null)}
+            onAdd={handleAdd}
+          />
+        </div>
         {toast && <Toast msg={toast} position="bottom-center" />}
       </div>
     );
