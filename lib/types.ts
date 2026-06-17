@@ -52,3 +52,41 @@ export type PainelRoute =
   | "cadastro"
   | "categorias"
   | "configuracoes";
+
+export interface StoreProduct {
+  id: string;
+  name: string;
+  priceCents: number;
+  description: string | null;
+  categoryId: string | null;
+  sizes: string[];
+  soldSizes: string[];
+  colors: ProductColor[];
+  images: string[];
+  stock: number;
+  isActive: boolean;
+  isNew: boolean;
+}
+
+export interface StoreCategory {
+  id: string;
+  name: string;
+  position: number;
+  productCount: number;
+}
+
+export interface StoreSettings {
+  id: string;
+  name: string;
+  slug: string;
+  plan: "starter" | "pro" | null;
+  trialEndsAt: string;
+  whatsapp: string | null;
+  accentColor: string;
+  logoUrl: string | null;
+  description: string | null;
+  monogram: string | null;
+  analyticsId: string | null;
+  pixelId: string | null;
+  messageTemplate: string | null;
+}
