@@ -5,11 +5,20 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Modal } from "@/components/ui/Modal";
 import { Toast } from "@/components/ui/Toast";
+import type { StoreCategory } from "@/lib/types";
 import { useCategorias } from "./use-categorias";
 
-export function CategoriasClient() {
+interface CategoriasClientProps {
+  categories: StoreCategory[];
+  maxCategories: number;
+}
+
+export function CategoriasClient({
+  categories,
+  maxCategories,
+}: CategoriasClientProps) {
   const {
-    categories,
+    limitReached,
     creating,
     setCreating,
     createDraft,
@@ -21,11 +30,10 @@ export function CategoriasClient() {
     deleteTarget,
     setDeleteTarget,
     toast,
-    countFor,
     create,
     save,
     remove,
-  } = useCategorias();
+  } = useCategorias(categories, maxCategories);
 
   return (
     <div className="max-w-form flex flex-col gap-6">
@@ -38,15 +46,20 @@ export function CategoriasClient() {
             Organize as peças do seu catálogo.
           </p>
         </div>
-        {!creating && (
-          <Button
-            variant="primary"
-            iconLeft={<Plus size={18} />}
-            onClick={() => setCreating(true)}
-          >
-            Nova categoria
-          </Button>
-        )}
+        {!creating &&
+          (limitReached ? (
+            <span className="font-body text-[13px] text-graphite">
+              Limite de {maxCategories} atingido — faça upgrade
+            </span>
+          ) : (
+            <Button
+              variant="primary"
+              iconLeft={<Plus size={18} />}
+              onClick={() => setCreating(true)}
+            >
+              Nova categoria
+            </Button>
+          ))}
       </div>
 
       <Card pad={0} className="overflow-hidden">
@@ -88,13 +101,11 @@ export function CategoriasClient() {
           </div>
         ) : (
           categories.map((cat, i) =>
-            editingCat === cat ? (
+            editingCat === cat.id ? (
               <div
-                key={cat}
+                key={cat.id}
                 className="flex items-center gap-2.5 px-5 py-3.5"
-                style={{
-                  borderTop: i > 0 ? "0.5px solid var(--color-border)" : "none",
-                }}
+                style={{ borderTop: i > 0 ? "0.5px solid var(--color-border)" : "none" }}
               >
                 <input
                   autoFocus
@@ -116,28 +127,27 @@ export function CategoriasClient() {
               </div>
             ) : (
               <div
-                key={cat}
+                key={cat.id}
                 className="flex items-center gap-4 px-5 py-3.5"
-                style={{
-                  borderTop: i > 0 ? "0.5px solid var(--color-border)" : "none",
-                }}
+                style={{ borderTop: i > 0 ? "0.5px solid var(--color-border)" : "none" }}
               >
                 <div className="w-9 h-9 rounded-[8px] bg-linen flex items-center justify-center text-graphite flex-shrink-0">
                   <Layers size={18} />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="font-display font-medium text-[15px] text-obsidian">
-                    {cat}
+                    {cat.name}
                   </div>
                   <div className="font-body text-[13px] text-graphite mt-0.5">
-                    {countFor(cat)} {countFor(cat) === 1 ? "produto" : "produtos"}
+                    {cat.productCount}{" "}
+                    {cat.productCount === 1 ? "produto" : "produtos"}
                   </div>
                 </div>
                 <div className="flex gap-1">
                   <button
                     onClick={() => {
-                      setEditDraft(cat);
-                      setEditingCat(cat);
+                      setEditDraft(cat.name);
+                      setEditingCat(cat.id);
                     }}
                     aria-label="Editar"
                     className="w-9 h-9 rounded-btn border border-sand/50 bg-transparent text-obsidian flex items-center justify-center hover:bg-surface-hover transition-colors"
@@ -146,8 +156,9 @@ export function CategoriasClient() {
                   </button>
                   <button
                     onClick={() => setDeleteTarget(cat)}
+                    disabled={cat.productCount > 0}
                     aria-label="Excluir"
-                    className="w-9 h-9 rounded-btn border border-sand/50 bg-transparent text-error flex items-center justify-center hover:bg-error-surface transition-colors"
+                    className="w-9 h-9 rounded-btn border border-sand/50 bg-transparent text-error flex items-center justify-center hover:bg-error-surface transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                   >
                     <Trash2 size={15} />
                   </button>
@@ -162,8 +173,10 @@ export function CategoriasClient() {
         <Modal title="Excluir categoria" onClose={() => setDeleteTarget(null)}>
           <p className="font-body text-[15px] text-graphite leading-relaxed">
             Tem certeza que deseja excluir{" "}
-            <strong className="text-obsidian font-semibold">{deleteTarget}</strong>?
-            Os produtos desta categoria não serão afetados.
+            <strong className="text-obsidian font-semibold">
+              {deleteTarget.name}
+            </strong>
+            ?
           </p>
           <div className="flex justify-end gap-3">
             <Button variant="ghost" onClick={() => setDeleteTarget(null)}>
