@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { parsePrice, formatMoney, buildWhatsAppMessage, cn, parseReaisToCents, formatCents } from "@/lib/utils";
+import { parsePrice, formatMoney, buildWhatsAppMessage, cn, parseReaisToCents, formatCents, maskCurrencyInput } from "@/lib/utils";
 
 describe("parsePrice", () => {
   it("parses a Brazilian real price string", () => {
@@ -156,5 +156,24 @@ describe("formatCents", () => {
 
   it("formata 5000 como 'R$ 50,00'", () => {
     expect(formatCents(5000)).toBe("R$ 50,00");
+  });
+});
+
+describe("maskCurrencyInput", () => {
+  it("formata dígitos como centavos: '2899' -> '28,99'", () => {
+    expect(maskCurrencyInput("2899")).toBe("28,99");
+  });
+
+  it("ignora caracteres não numéricos", () => {
+    expect(maskCurrencyInput("R$ 28,99")).toBe("28,99");
+  });
+
+  it("retorna string vazia para entrada sem dígitos", () => {
+    expect(maskCurrencyInput("")).toBe("");
+    expect(maskCurrencyInput("abc")).toBe("");
+  });
+
+  it("trata um único dígito como centavos: '5' -> '0,05'", () => {
+    expect(maskCurrencyInput("5")).toBe("0,05");
   });
 });
