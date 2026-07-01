@@ -1,5 +1,7 @@
 # Catálogo Público — Tasks
 
+**Status: ✅ concluído** — T1–T5 implementadas, commitadas e verificadas (ver validation.md).
+
 Cada task: implementar → gate (testes verdes) → 1 commit atômico. Nunca enfraquecer testes p/ passar.
 
 ## Fase 1 — Backend: RLS + camada de dados

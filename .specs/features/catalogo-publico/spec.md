@@ -146,20 +146,20 @@ As três telas do catálogo público (Home, Detalhe do produto, Sacola drawer) j
 
 | Requirement ID | Story | Phase | Status |
 | -------------- | ----- | ----- | ------ |
-| CAT-01 | P1: Home por slug | Design | Pending |
-| CAT-02 | P1: Home por slug (filtro/pills) | Design | Pending |
-| CAT-03 | P1: Home por slug (404 / vazio) | Design | Pending |
-| CAT-04 | P1: Ocultar esgotados/inativos (app) | Design | Pending |
-| CAT-05 | P1: Ocultar esgotados/inativos (RLS) | Design | Pending |
-| CAT-06 | P1: Detalhe + adicionar | Design | Pending |
-| CAT-07 | P1: Sacola + template WhatsApp | Design | Pending |
-| CAT-08 | P1: Fallback template + wa.me | Design | Pending |
-| CAT-09 | P1: WhatsApp ausente → checkout off | Design | Pending |
-| CAT-10 | P1: Visibilidade (trial/inativa) | Design | Pending |
+| CAT-01 | P1: Home por slug | T2, T4 | Verified |
+| CAT-02 | P1: Home por slug (filtro/pills) | T2, T4 | Verified |
+| CAT-03 | P1: Home por slug (404 / vazio) | T2, T4 | Verified |
+| CAT-04 | P1: Ocultar esgotados/inativos (app) | T4 | Verified |
+| CAT-05 | P1: Ocultar esgotados/inativos (RLS) | T1 | Verified |
+| CAT-06 | P1: Detalhe + adicionar | T2, T4 | Verified |
+| CAT-07 | P1: Sacola + template WhatsApp | T3 | Verified |
+| CAT-08 | P1: Fallback template + wa.me | T3, T4 | Verified |
+| CAT-09 | P1: WhatsApp ausente → checkout off | T4, T5 | Verified |
+| CAT-10 | P1: Visibilidade (inativa) | T2, T4 | Verified |
 
 **Status values:** Pending → In Design → In Tasks → Implementing → Verified
 
-**Coverage:** 10 total, 0 mapped to tasks yet (tasks.md pending)
+**Coverage:** 10 total, 10 verified (ver validation.md)
 
 ---
 

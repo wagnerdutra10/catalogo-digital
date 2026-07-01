@@ -11,8 +11,8 @@
 
 ## Handoff snapshot
 
-- **Branch:** `feature/catalogo-publico`
-- **Fase atual:** Planejamento concluído (spec + design + tasks escritos). Aguardando confirmação do usuário antes de executar.
-- **A confirmar:** AD-003 (regra de visibilidade do catálogo).
-- **Próximo passo:** Executar Fase 1 (T1 migration RLS → T2 camada de dados).
-- **Arquivos-chave:** `.specs/features/catalogo-publico/{spec,design,tasks}.md`.
+- **Branch:** `feature/catalogo-publico` (5 commits: fceca3e→2b7b037)
+- **Fase atual:** Concluído. Todas as tasks T1–T5 implementadas, commitadas e verificadas.
+- **Validação:** ✅ PASS — 120 testes verdes, build OK, sensor de discriminação (3/3 mutações mortas), runtime end-to-end confirmado (`/atelie-mira` 200, slug inexistente 404, loja inativa → expiração, esgotado/inativo ocultos). Ver `.specs/features/catalogo-publico/validation.md`.
+- **Ambiente:** stack Supabase local iniciado (`supabase start`) + seed demo aplicado (loja `atelie-mira`).
+- **Próximo passo:** revisar/abrir PR. Backlog: injeção GA/Pixel, persistência de sacola, cheque de trial quando houver pagamento.
