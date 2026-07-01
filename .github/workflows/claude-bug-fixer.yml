@@ -45,7 +45,20 @@ jobs:
             - Faça apenas as mudanças necessárias para corrigir o bug — sem refatorações extras
             - Mantenha consistência com o estilo de código existente
             - Se o bug não for reproduzível ou a causa não for clara, não modifique nenhum arquivo
+          show_full_output: "true"
           claude_args: '--max-turns 50'
+
+      - name: Debug git state after Claude
+        if: always()
+        run: |
+          echo "=== git status ==="
+          git status
+          echo "=== changed files ==="
+          git status --porcelain
+          echo "=== git log (last 3) ==="
+          git log --oneline -3
+          echo "=== git stash list ==="
+          git stash list
 
       - name: Create PR with Claude's changes
         if: success()
