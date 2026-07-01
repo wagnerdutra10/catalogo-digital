@@ -2,13 +2,10 @@ name: Claude Bug Fixer
 
 on:
   issues:
-    types: [opened, labeled]
+    types: [labeled]
 
 jobs:
   fix-bug:
-    if: |
-      (github.event.action == 'labeled' && github.event.label.name == 'bug') ||
-      (github.event.action == 'opened' && contains(toJSON(github.event.issue.labels), '"name":"bug"'))
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -27,13 +24,9 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          label_trigger: bug
           prompt: |
-            A issue #${{ github.event.issue.number }} foi marcada como bug.
-
-            Título: ${{ github.event.issue.title }}
-            Descrição: ${{ github.event.issue.body }}
-
-            IMPORTANTE: Você está num ambiente CI. NÃO execute nenhum comando git (git add, git commit, git push, git checkout, git status, etc.) — o sistema vai commitar e criar o PR automaticamente após você terminar. Use APENAS as ferramentas Edit, Write e MultiEdit para modificar arquivos.
+            Você foi acionado porque esta issue foi marcada como bug.
 
             Contexto do projeto:
             - Leia AGENTS.md e docs/ARCHITECTURE.md antes de explorar o código
@@ -42,39 +35,15 @@ jobs:
 
             Sua tarefa:
             1. Leia AGENTS.md para entender o projeto
-            2. Encontre o código relacionado ao bug
-            3. Implemente a correção mínima necessária usando Edit/Write
-            4. Quando terminar, escreva um resumo explicando o que foi corrigido e por quê
+            2. Encontre o código relacionado ao bug descrito na issue
+            3. Implemente a correção mínima necessária
+
+            O PR deve ter:
+            - Título: fix: <descrição curta do bug>
+            - Corpo com "Closes #<número da issue>" e explicação da causa raiz
 
             Diretrizes:
             - Faça apenas as mudanças necessárias para corrigir o bug — sem refatorações extras
             - Mantenha consistência com o estilo de código existente
-            - Se o bug não for reproduzível ou a causa não for clara, use Bash(gh issue comment) para pedir mais informações e não modifique nenhum arquivo
-          settings: |
-            {
-              "permissions": {
-                "allow": [
-                  "Bash(ls *)",
-                  "Bash(find *)",
-                  "Bash(grep *)",
-                  "Bash(cat *)",
-                  "Bash(echo *)",
-                  "Bash(node *)",
-                  "Bash(npm *)",
-                  "Bash(npx *)",
-                  "Bash(python3 *)",
-                  "Bash(sed *)",
-                  "Bash(awk *)",
-                  "Bash(gh issue comment *)",
-                  "Edit",
-                  "Write",
-                  "MultiEdit"
-                ],
-                "deny": [
-                  "Bash(git *)",
-                  "Bash(gh pr *)"
-                ]
-              }
-            }
-          show_full_output: "true"
+            - Se o bug não for reproduzível ou a causa não for clara, comente na issue pedindo mais informações
           claude_args: '--max-turns 50'
