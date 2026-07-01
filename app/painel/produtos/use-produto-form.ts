@@ -89,15 +89,16 @@ export function useProdutoForm(
     const fd = new FormData();
     fd.set("name", v);
     const res = await createCategory(null, fd);
-    if (res && "error" in res) {
-      flash(res.error, "error");
+    if (!res || "error" in res) {
+      flash(res?.error ?? "Erro ao criar categoria.", "error");
       return;
     }
+    const id = res.id ?? v;
     setCatList((prev) => [
       ...prev,
-      { id: v, name: v, position: prev.length, productCount: 0 },
+      { id, name: v, position: prev.length, productCount: 0 },
     ]);
-    setCategory(v);
+    setCategory(id);
     setQuickCat(false);
     setCatDraft("");
     flash("Categoria criada");
