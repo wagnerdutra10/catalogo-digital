@@ -201,12 +201,7 @@ export default function TermosDeUsoPage() {
             >
               Política de Privacidade
             </NextLink>
-            <NextLink
-              href="/termos-de-uso"
-              className="hover:text-obsidian transition-colors"
-            >
-              Termos de Uso
-            </NextLink>
+            <span className="text-obsidian font-medium cursor-default">Termos de Uso</span>
           </div>
         </div>
       </footer>

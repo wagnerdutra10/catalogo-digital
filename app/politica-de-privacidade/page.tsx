@@ -203,12 +203,7 @@ export default function PoliticaDePrivacidadePage() {
         <div className="max-w-[720px] mx-auto px-4 sm:px-8 flex flex-col sm:flex-row gap-3 sm:gap-0 items-center justify-between font-body text-[13px] text-graphite">
           <span>© 2026 Vtrine Digital. Todos os direitos reservados.</span>
           <div className="flex items-center gap-4">
-            <NextLink
-              href="/politica-de-privacidade"
-              className="hover:text-obsidian transition-colors"
-            >
-              Política de Privacidade
-            </NextLink>
+            <span className="text-obsidian font-medium cursor-default">Política de Privacidade</span>
             <NextLink
               href="/termos-de-uso"
               className="hover:text-obsidian transition-colors"
