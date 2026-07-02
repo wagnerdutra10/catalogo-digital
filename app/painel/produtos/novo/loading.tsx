@@ -4,7 +4,7 @@ function Sk({ w, h, rounded = "rounded-[6px]" }: { w: string; h: string; rounded
 
 function FieldSkeleton({ wide = false }: { wide?: boolean }) {
   return (
-    <div className={`flex flex-col gap-1.5 ${wide ? "col-span-2" : ""}`}>
+    <div className={`flex flex-col gap-1.5 ${wide ? "sm:col-span-2" : ""}`}>
       <Sk w="w-24" h="h-3" />
       <Sk w="w-full" h="h-11" rounded="rounded-input" />
     </div>
@@ -18,7 +18,7 @@ export default function NovoProdutoLoading() {
 
       <div className="bg-white border border-sand/50 rounded-card p-6 flex flex-col gap-5">
         <Sk w="w-16" h="h-4" />
-        <div className="grid grid-cols-2 gap-[18px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-[18px]">
           <FieldSkeleton wide />
           <FieldSkeleton />
           <FieldSkeleton />
@@ -37,9 +37,9 @@ export default function NovoProdutoLoading() {
 
       <div className="bg-white border border-sand/50 rounded-card p-6 flex flex-col gap-4">
         <Sk w="w-20" h="h-4" />
-        <div className="flex gap-3">
+        <div className="flex gap-3 flex-wrap">
           {Array.from({ length: 3 }).map((_, i) => (
-            <Sk key={i} w="w-[120px]" h="h-[120px]" rounded="rounded-[10px]" />
+            <Sk key={i} w="w-[100px] sm:w-[120px]" h="h-[100px] sm:h-[120px]" rounded="rounded-[10px]" />
           ))}
         </div>
       </div>

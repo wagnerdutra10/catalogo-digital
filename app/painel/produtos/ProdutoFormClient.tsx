@@ -54,7 +54,7 @@ export function ProdutoFormClient({
             · mínimo 1, máximo {maxPhotos}
           </span>
         </h2>
-        <div className="grid grid-cols-5 gap-3">
+        <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
           {f.existingPhotos.map((src, i) => (
             <div
               key={src}
@@ -119,8 +119,8 @@ export function ProdutoFormClient({
         <h2 className="font-display font-medium text-[16px] text-obsidian mb-4">
           Informações
         </h2>
-        <div className="grid grid-cols-2 gap-[18px]">
-          <div className="col-span-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-[18px]">
+          <div className="sm:col-span-2">
             <Input
               name="name"
               label="Nome do produto"
@@ -129,7 +129,7 @@ export function ProdutoFormClient({
               placeholder="Ex: Vestido midi linho"
             />
           </div>
-          <div className="col-span-2">
+          <div className="sm:col-span-2">
             <Textarea
               name="description"
               label="Descrição"
@@ -188,7 +188,7 @@ export function ProdutoFormClient({
         <h2 className="font-display font-medium text-[16px] text-obsidian mb-4">
           Estoque & visibilidade
         </h2>
-        <div className="grid grid-cols-2 gap-[18px] pb-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-[18px] pb-2">
           <Input
             name="stock"
             label="Quantidade em estoque"
