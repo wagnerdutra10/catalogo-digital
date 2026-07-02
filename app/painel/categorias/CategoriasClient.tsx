@@ -37,7 +37,7 @@ export function CategoriasClient({
 
   return (
     <div className="max-w-form flex flex-col gap-6">
-      <div className="flex items-end justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
         <div>
           <h1 className="font-display font-semibold text-[28px] text-obsidian">
             Categorias
@@ -64,7 +64,7 @@ export function CategoriasClient({
 
       <Card pad={0} className="overflow-hidden">
         {creating && (
-          <div className="flex items-center gap-2.5 px-5 py-3.5 bg-linen border-b border-sand/50">
+          <div className="flex items-center flex-wrap gap-2.5 px-5 py-3.5 bg-linen border-b border-sand/50">
             <input
               autoFocus
               value={createDraft}
@@ -104,7 +104,7 @@ export function CategoriasClient({
             editingCat === cat.id ? (
               <div
                 key={cat.id}
-                className="flex items-center gap-2.5 px-5 py-3.5"
+                className="flex items-center flex-wrap gap-2.5 px-5 py-3.5"
                 style={{ borderTop: i > 0 ? "0.5px solid var(--color-border)" : "none" }}
               >
                 <input
