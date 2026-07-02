@@ -116,7 +116,7 @@ export function LoginForm({ next, resetSuccess }: LoginFormProps) {
             </button>
           </form>
 
-          <p className="text-center font-body text-[14px] text-graphite">
+          <p className="text-center font-body text-[14px] text-graphite mt-5">
             Não tem conta?{' '}
             <Link
               href="/cadastro"
